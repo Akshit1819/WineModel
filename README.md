@@ -33,3 +33,13 @@ python -m uvicorn app:app --reload --host 127.0.0.1 --port 8000
 🎥 Demo Video
 
 Watch the video in repositorie
+
+🛠️ Tech Stack
+
+Backend: FastAPI, LangGraph, Groq LLM, HuggingFace Embeddings, FAISS
+
+Frontend: React, Vite, TailwindCSS
+
+APIs: DuckDuckGo Search, OpenWeatherMap
+
+Docs: PDF ingestion via pypdf
