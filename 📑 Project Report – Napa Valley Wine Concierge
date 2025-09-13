@@ -1,0 +1,77 @@
+1. Approach
+
+We designed the Wine Concierge as a smart AI assistant for a Napa Valley wine business. The main goals were:
+
+Build a conversational agent capable of answering wine-related business questions.
+
+Enable real-time tools:
+
+🌤️ Weather updates (OpenWeather API)
+
+🌍 Web search (DuckDuckGo)
+
+Provide a frontend UI for customers to interact directly.
+
+Ensure flexibility, accuracy, and scalability.
+
+Architecture:
+
+Backend – FastAPI + LangGraph agent with Groq LLM, HuggingFace embeddings, FAISS for document retrieval.
+
+Frontend – React + Vite, styled with Tailwind, designed for a clean user experience.
+
+Storage – FAISS index for uploaded documents (PDF ingestion via pypdf).
+
+Integration – .env for secure API keys (Groq, OpenWeather).
+
+2. Challenges
+a) Document Ingestion & QA
+
+Challenge: Handling large business documents and making them queryable.
+
+Issue: FAISS sometimes failed to reload after ingestion.
+
+b) Environment Variables
+
+Challenge: API keys (OPENWEATHERMAP_API_KEY, GROQ_API_KEY) not loading correctly.
+
+Issue: Keys returned None in Python when running uvicorn.
+
+c) Frontend Styling
+
+Challenge: Initial UI looked unorganized and plain.
+
+Issue: Needed a professional, winery-style look.
+
+d) Cross-Origin Communication (CORS)
+
+Challenge: Frontend React app couldn’t talk to FastAPI backend due to CORS restrictions.
+
+e) Dependencies
+
+Challenge: Missing libraries (pypdf, sentence-transformers) caused runtime errors.
+
+3. Solutions
+
+✅ Document QA – Used pypdf + HuggingFace embeddings to chunk PDFs, stored in FAISS. Added retriever refresh on file upload.
+
+✅ Environment Variables – Fixed by explicitly loading .env with load_dotenv() and confirming with print(os.getenv(...)).
+
+✅ Frontend Styling – Added Tailwind CSS, wine-themed colors (deep burgundy, cream, gold), improved layout, background image for vineyards.
+
+✅ CORS Issue – Enabled fastapi.middleware.cors.CORSMiddleware in backend.
+
+✅ Dependencies – Added requirements.txt and package.json with all required packages, included instructions in README.
+
+4. Improvements & Future Work
+
+🔹 Advanced Personalization – Allow users to save preferences (favorite wines, past questions).
+🔹 Voice Support – Integrate text-to-speech and speech-to-text for a true concierge feel.
+🔹 Mobile App – Wrap the frontend into a mobile-friendly PWA or React Native app.
+🔹 Reservation System – Connect to booking APIs for vineyard tours & tastings.
+🔹 Analytics Dashboard – Track most asked questions, customer trends, and insights.
+🔹 Multilingual Support – Translate responses for international visitors.
+
+5. Conclusion
+
+The Napa Valley Wine Concierge successfully combines AI + real-time tools + elegant UI to act as a digital sommelier. While initial challenges included environment setup and UI design, the final solution is scalable, intuitive, and ready for deployment in real-world vineyard experiences.
